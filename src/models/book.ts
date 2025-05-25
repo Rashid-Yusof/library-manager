@@ -6,5 +6,5 @@ export interface Book {
     publicationYear: number;
     genre: string;
     copies: number;
-    available: boolean;
+    isAvailable: boolean;
 }
