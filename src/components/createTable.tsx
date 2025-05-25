@@ -6,12 +6,15 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import Button from '@mui/material/Button';
 
-type TableData = {
+type CreateTableProps = {
   data: Array<{ [key: string]: any }>;
+  buttons: Array<string>;
 };
 
-const CreateTable = ({ data }: TableData) => {
+const CreateTable = ({ data, buttons }: CreateTableProps) => {
   // Get table headers from keys of the first object
   const headers = data.length > 0 ? Object.keys(data[0]) : [];
 
@@ -23,7 +26,11 @@ const CreateTable = ({ data }: TableData) => {
           {headers.map((header) => (
             <TableCell key={header}>{header}</TableCell>
           ))}
+          <TableCell>
+          Actions
+        </TableCell>
         </TableRow>
+        
       </TableHead>
       <TableBody>
         {data.map((row, rowIndex) => (
@@ -33,6 +40,13 @@ const CreateTable = ({ data }: TableData) => {
                 {row[key]}
               </TableCell>
             ))}
+            <TableCell>
+            <ButtonGroup variant="contained" aria-label="Basic button group">
+              {buttons.map((label) => (
+              <Button>{label}</Button>
+            ))}
+            </ButtonGroup>
+          </TableCell>
           </TableRow>
         ))}
       </TableBody>
