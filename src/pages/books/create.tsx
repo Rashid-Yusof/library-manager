@@ -15,8 +15,11 @@ import { Genre } from '../../models/genre';
 import { Book } from '../../models/book';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
+import { useNavigate } from 'react-router-dom';
 
 const BookForm = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState<Omit<Book, 'id'>>({
     title: '',
     author: '',
@@ -51,6 +54,7 @@ const BookForm = () => {
     try {
       const docRef = await addDoc(collection(db, 'books'), newBook);
       console.log('Document written with ID: ', docRef.id);
+      navigate('/books/view');
     } catch (error) {
       console.error('Error adding document: ', error);
     }
