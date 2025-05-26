@@ -1,4 +1,3 @@
-import React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -8,6 +7,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 type CreateTableProps = {
   data: Array<{ [key: string]: any }>;
@@ -15,7 +15,7 @@ type CreateTableProps = {
 };
 
 const CreateTable = ({ data, buttons }: CreateTableProps) => {
-  // Get table headers from keys of the first object
+  // Get table headers
   const headers = data.length > 0 ? Object.keys(data[0]) : [];
 
   return (
@@ -43,7 +43,7 @@ const CreateTable = ({ data, buttons }: CreateTableProps) => {
             <TableCell>
             <ButtonGroup variant="contained" aria-label="Basic button group">
               {buttons.map((label) => (
-              <Button>{label}</Button>
+              <Button variant="contained" sx={{mb:5}} component={Link} to={`/books/edit`} state={{ book: row }} >{label}</Button>
             ))}
             </ButtonGroup>
           </TableCell>
