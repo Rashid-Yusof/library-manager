@@ -1,81 +1,37 @@
-import React from 'react';
-import { Box, Typography } from '@mui/material';
-import ViewPage from './pages/view';
-import {Book} from './models/book';
-import {Genre} from './models/genre';
+import { Box, Typography, Button, ButtonGroup, Container } from '@mui/material';
+import ViewPage from './pages/books/view';
+import BookForm from './pages/books/create';
+import EditBook from './pages/books/edit';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 function App() {
-  const exampleBooks: Book[] = [
-  {
-    id: "1",
-    title: "The Great Gatsby",
-    author: "F. Scott Fitzgerald",
-    isbn: "9780743273565",
-    publicationYear: 1925,
-    genre: Genre.Fiction,
-    copies: 5,
-    isAvailable: true,
-  },
-  {
-    id: "2",
-    title: "1984",
-    author: "George Orwell",
-    isbn: "9780451524935",
-    publicationYear: 1949,
-    genre: Genre.NonFiction,
-    copies: 3,
-    isAvailable: false,
-  },
-  {
-    id: "3",
-    title: "To Kill a Mockingbird",
-    author: "Harper Lee",
-    isbn: "9780060935467",
-    publicationYear: 1960,
-    genre: Genre.Science,
-    copies: 4,
-    isAvailable: true,
-  },
-  {
-    id: "4",
-    title: "The Hobbit",
-    author: "J.R.R. Tolkien",
-    isbn: "9780547928227",
-    publicationYear: 1937,
-    genre: Genre.History,
-    copies: 2,
-    isAvailable: true,
-  },
-  {
-    id: "5",
-    title: "Pride and Prejudice",
-    author: "Jane Austen",
-    isbn: "9780141439518",
-    publicationYear: 1813,
-    genre: Genre.Fiction,
-    copies: 6,
-    isAvailable: false,
-  },
-];
-
-const bookButtons: string[] = ['Edit','Remove']
 
   return (
-    <div>
-      <Box 
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        height="100%" // Full height of container
-        mt={2}
-      >
-        <Typography variant="h4" gutterBottom>
-          Library Management App
-        </Typography>
-      </Box>
-      <ViewPage title="Books" tableData={exampleBooks} buttons={bookButtons}/>
-    </div>
+    <Router>
+      <Container>
+        <Box 
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          mt={4}
+          mb={4}
+        >
+          <Typography variant="h4" gutterBottom>
+            Library Management App
+          </Typography>
+          <ButtonGroup variant="contained" aria-label="navigation">
+            <Button component={Link} to="/books/view">Books</Button>
+            <Button>Orders</Button>
+            <Button>Loans</Button>
+          </ButtonGroup>
+        </Box>
+        <Routes>
+          <Route path="/books/view" element={<ViewPage title="Books" buttons={['Edit', 'Remove']} />} />
+          <Route path="/books/create" element={<BookForm />}/>
+          <Route path="/books/edit" element={<EditBook />}/>
+        </Routes>      
+      </Container>      
+    </Router>
   );
 }
 
