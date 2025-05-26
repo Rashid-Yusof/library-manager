@@ -1,18 +1,15 @@
-import React from 'react';
 import { Container, Box, Typography } from '@mui/material';
-import CreateTable from '../components/createTable';
-import Button from '@mui/material/Button';
+import CreateTable from './createTable';
 
 type ViewPageProps = {
   title: string;
   tableData: Array<{ [key: string]: any }>;
   buttons: Array<string>;
-
 };
 
 const ViewPage = ({ title, tableData, buttons }: ViewPageProps) => {
   return (
-    <Container maxWidth="lg" sx={{ height: '100vh' }}>
+    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <Box
         display="flex"
         flexDirection="column"
@@ -22,8 +19,7 @@ const ViewPage = ({ title, tableData, buttons }: ViewPageProps) => {
       >
         <Typography variant="h4" gutterBottom>
           View {title}
-        </Typography>        
-        <Button variant="contained">Add New</Button>       
+        </Typography>           
         <CreateTable data={tableData} buttons={buttons}/>
       </Box>
     </Container>
